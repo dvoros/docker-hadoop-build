@@ -50,8 +50,7 @@ ENV export LD_RUN_PATH /usr/local/lib
 RUN cd /tmp/hadoop-2.7.4-src && mvn package -Pdist,native -DskipTests -Dtar
 
 # tar to stdout
-CMD tar -cv -C /tmp/hadoop-2.7.4-src/hadoop-dist/target/hadoop-2.7.4/lib/native/ .
+CMD tar -czv -C /tmp/hadoop-2.7.4-src/hadoop-dist/target/hadoop-2.7.4/lib/native/ .
 
-# docker run --rm  sequenceiq/hadoop-nativelibs > x.tar
-# get bintray helper
-#RUN curl -Lo /tmp/bintray-functions j.mp/bintray-functions && . /tmp/bintray-functions
+# Create native libs tar with:
+# docker run --rm dvoros/docker-hadoop-build > hadoop-native-64-2.7.4.tgz
