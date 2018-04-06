@@ -20,9 +20,9 @@ RUN ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa
 RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 # java
-RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.rpm' -H 'Cookie: oraclelicense=accept-securebackup-cookie'
-RUN rpm -i jdk-8u144-linux-x64.rpm
-RUN rm jdk-8u144-linux-x64.rpm
+RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.rpm' -H 'Cookie: oraclelicense=accept-securebackup-cookie'
+RUN rpm -i jdk-8u161-linux-x64.rpm
+RUN rm jdk-8u161-linux-x64.rpm
 ENV JAVA_HOME /usr/java/default
 ENV PATH $PATH:$JAVA_HOME/bin
 
@@ -37,7 +37,7 @@ ENV M2_HOME /usr/share/apache-maven-${M2_VER}
 ENV PATH $PATH:$M2_HOME/bin
 
 # hadoop
-RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.4/hadoop-2.7.4-src.tar.gz | tar -xz -C /tmp/
+RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-3.0.1/hadoop-3.0.1-src.tar.gz | tar -xz -C /tmp/
 
 # protoc -ohhh
 RUN curl -L https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.bz2 | bunzip2 | tar -x -C /tmp
@@ -47,10 +47,10 @@ ENV LD_LIBRARY_PATH /usr/local/lib
 ENV export LD_RUN_PATH /usr/local/lib
 
 # build native libs
-RUN cd /tmp/hadoop-2.7.4-src && mvn package -Pdist,native -DskipTests -Dtar
+RUN cd /tmp/hadoop-3.0.1-src && mvn package -Pdist,native -DskipTests -Dtar
 
 # tar to stdout
-CMD tar -czv -C /tmp/hadoop-2.7.4-src/hadoop-dist/target/hadoop-2.7.4/lib/native/ .
+CMD tar -czv -C /tmp/hadoop-3.0.1-src/hadoop-dist/target/hadoop-3.0.1/lib/native/ .
 
 # Create native libs tar with:
 # docker run --rm dvoros/docker-hadoop-build > hadoop-native-64-2.7.4.tgz
