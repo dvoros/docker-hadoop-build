@@ -31,7 +31,7 @@ RUN yum groupinstall "Development Tools" -y
 RUN yum install -y cmake zlib-devel openssl-devel
 
 # maven
-ENV M2_VER=3.2.5
+ENV M2_VER=3.5.3
 RUN curl http://www.eu.apache.org/dist/maven/maven-3/${M2_VER}/binaries/apache-maven-${M2_VER}-bin.tar.gz|tar xz  -C /usr/share
 ENV M2_HOME /usr/share/apache-maven-${M2_VER}
 ENV PATH $PATH:$M2_HOME/bin
