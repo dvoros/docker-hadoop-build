@@ -40,7 +40,7 @@ ENV PATH $PATH:$M2_HOME/bin
 RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-3.0.1/hadoop-3.0.1-src.tar.gz | tar -xz -C /tmp/
 
 # protoc -ohhh
-RUN curl -L https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.bz2 | bunzip2 | tar -x -C /tmp
+RUN curl -L -k1 https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.bz2 | bunzip2 | tar -x -C /tmp
 RUN cd /tmp/protobuf-2.5.0 && ./configure
 RUN cd /tmp/protobuf-2.5.0 && make && make install
 ENV LD_LIBRARY_PATH /usr/local/lib
